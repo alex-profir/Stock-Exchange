@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
 import { getDataSetsForWIKI, getTimeSeriesData } from "../services/timeSeries";
 import { ChartDisplay } from "../components/ChartDisplay";
 import { AsyncAutocomplete } from "../components/AsyncAutocomplete";
@@ -50,6 +50,14 @@ export function StockExchange() {
         equalityCheck={(a, b) => a.id === b.id}
         renderItem={(dataset) => dataset.dataset_code}
       />
+      {isLoading ? (
+        <Stack direction="row" alignItems="center" gap={2}>
+          <Typography variant="h6" gutterBottom>
+            Gathering the data for the specified company
+          </Typography>
+          <CircularProgress color="inherit" size={20} />
+        </Stack>
+      ) : null}
       {selectedOption ? (
         <Box my={2}>
           {error ? (
@@ -63,9 +71,7 @@ export function StockExchange() {
           )}
         </Box>
       ) : (
-        <Box>
-          <Typography>Select a company to display the chart</Typography>
-        </Box>
+        <Typography>Select a company to display the chart</Typography>
       )}
     </Box>
   );
