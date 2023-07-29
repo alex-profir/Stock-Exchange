@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 export const nasdaqApi = axios.create({
-  baseURL: "https://www.quandl.com/api/v3/",
+  baseURL: import.meta.env.VITE_NASDAQ_API_URL,
 });
 
 export async function wrapAxiosCall<T>(promise: Promise<AxiosResponse<T>>) {
